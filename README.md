@@ -1,92 +1,126 @@
-Simulación de Teoría de Colas — Zona de Microondas Universitaria
+# Simulación de Teoría de Colas — Microondas Universitario
 
-Este proyecto presenta el análisis y simulación de un sistema de colas en una zona de microondas dentro de un entorno universitario, modelado como un sistema M/M/1 y extendido a diferentes escenarios de mejora, incluyendo un modelo M/M/2.
+Sistema de análisis y simulación basado en teoría de colas (modelos M/M/1 y M/M/2) aplicado a una zona de microondas en un entorno universitario.
 
-El objetivo es evaluar el desempeño del sistema real, comparar resultados teóricos y analizar estrategias que reduzcan los tiempos de espera y mejoren la eficiencia operativa.
+El proyecto integra datos reales, modelado matemático y simulación computacional para evaluar el desempeño del sistema y proponer mejoras operativas.
 
-Descripción del Problema
+---
 
-En horarios cercanos al almuerzo, múltiples estudiantes utilizan un único microondas, generando congestión y tiempos de espera. Este comportamiento se modela como un sistema de colas donde:
+## Descripción
 
-Los usuarios llegan de manera aleatoria (proceso de Poisson)
-Los tiempos de servicio son variables (distribución exponencial)
-Existe un único servidor (microondas)
-Objetivos
-Analizar el sistema real mediante datos observados
-Modelar el sistema como una cola M/M/1
-Calcular indicadores de desempeño (λ, μ, ρ, Wq, Lq, etc.)
-Comparar resultados teóricos vs observados
-Simular escenarios de mejora sin modificar y con modificación de infraestructura
-Estructura del Proyecto
+En horarios de alta demanda, múltiples usuarios utilizan un único microondas, generando filas y tiempos de espera. Este comportamiento se modela como un sistema de colas con las siguientes características:
 
-El proyecto se divide en dos grandes partes:
+- Llegadas aleatorias (proceso de Poisson, λ)  
+- Tiempos de servicio variables (distribución exponencial, μ)  
+- Un único servidor (microondas)  
 
-1. Análisis del Sistema Real
+---
+
+## Objetivos
+
+- Analizar el comportamiento real del sistema mediante datos observados  
+- Calcular indicadores de desempeño (λ, μ, ρ, Wq, W, Lq, L)  
+- Comparar resultados teóricos con datos reales  
+- Simular escenarios de mejora  
+- Evaluar alternativas para reducir tiempos de espera  
+
+---
+
+## Modelos Utilizados
+
+### M/M/1 (Sistema actual)
+- Un servidor  
+- Llegadas aleatorias  
+- Servicio exponencial  
+
+### M/M/2 (Escenario mejorado)
+- Dos servidores  
+- Misma tasa de llegada  
+- Reducción significativa de congestión  
+
+---
+
+## Estructura del Proyecto
+
+El proyecto se divide en dos componentes principales:
+
+### 1. Análisis del sistema real
 
 Incluye:
 
-Procesamiento de datos de dos sesiones experimentales
-Cálculo de:
-Tasa de llegada (λ)
-Tasa de servicio (μ)
-Utilización (ρ)
-Tiempo promedio de espera (Wq)
-Tiempo total en el sistema (W)
-Comparación con el modelo teórico M/M/1
-2. Simulación de Escenarios
+- Procesamiento de datos de dos sesiones experimentales  
+- Cálculo de:
+  - Tasa de llegada (λ)  
+  - Tasa de servicio (μ)  
+  - Utilización (ρ)  
+  - Tiempo promedio de espera (Wq)  
+  - Tiempo total en el sistema (W)  
+  - Longitud promedio de cola (Lq)  
+  - Número promedio de usuarios en el sistema (L)  
+- Comparación entre valores observados y teóricos del modelo M/M/1  
 
-Se implementan diferentes escenarios usando modelos analíticos de teoría de colas:
+---
 
-Escenario 1: Reducción del tiempo de servicio
-Disminución del 5% al 20%
-Impacto directo en μ
-Reduce significativamente Wq
-Escenario 2: Control de servicios largos
-Imposición de un tiempo máximo de uso
-Efectivo solo si el tope es menor al promedio actual
-Escenario 3: Distribución de llegadas
-Reducción de λ (5%, 10%, 15%)
-Simula cambios de comportamiento de usuarios
-Escenario 4: Segundo microondas (M/M/2)
-Sistema con dos servidores
-Reducción drástica de tiempos de espera (>90%)
-Escenario 5: Escenario combinado
-Reducción simultánea de λ y tiempo de servicio
-Mejor relación costo-beneficio sin inversión física
-Tecnologías Utilizadas
-Python 3
-Pandas
-NumPy
-Matplotlib
-Google Colab (ejecución del código)
-Resultados Generados
+### 2. Simulación de escenarios
 
-El proyecto genera:
+Se implementan cinco escenarios utilizando modelos analíticos de teoría de colas:
 
-Tablas de indicadores por sesión
-Comparaciones entre escenarios
-Gráficas:
-Tiempo de espera (Wq)
-Tiempo total en sistema (W)
-Utilización (ρ)
-Longitud de cola (Lq)
-Reducción porcentual de tiempos
-Comparación M/M/1 vs M/M/2
+#### Escenario 1: Reducción del tiempo de servicio
+- Disminución entre 5% y 20%  
+- Incremento de la tasa de servicio (μ)  
+- Reducción no lineal del tiempo de espera (Wq)  
 
-Archivos exportados en formato .png.
+#### Escenario 2: Control de servicios largos
+- Imposición de un tiempo máximo de uso  
+- Solo genera impacto si el tope es menor al promedio observado  
+- Reduce la variabilidad del sistema  
 
-Principales Hallazgos
-El sistema es estable (λ < μ), pero presenta congestión por llegadas agrupadas
-La espera no depende solo del número de usuarios, sino de:
-Variabilidad en el servicio
-Concentración de llegadas
-Reducir el tiempo de servicio tiene un impacto no lineal en la espera
-Agregar un segundo microondas elimina casi completamente la cola
-El escenario combinado ofrece la mejor solución sin costos adicionales
-Cómo Ejecutar
-Abrir el código en Google Colab o entorno local
-Ejecutar las celdas en orden
-Revisar:
-Tablas impresas en consola
-Gráficas generadas automáticamente
-Archivos .png exportados
+#### Escenario 3: Distribución de llegadas
+- Reducción de la tasa de llegada (λ) entre 5% y 15%  
+- Simula cambios en el comportamiento de los usuarios  
+- Disminuye la congestión en horas pico  
+
+#### Escenario 4: Segundo microondas (M/M/2)
+- Sistema con dos servidores  
+- Aplicación del modelo Erlang-C  
+- Reducción de más del 90% en el tiempo de espera  
+
+#### Escenario 5: Escenario combinado
+- Reducción simultánea del 10% en λ y en el tiempo de servicio  
+- Efecto conjunto no lineal  
+- Mejor relación costo-beneficio sin inversión en infraestructura  
+
+---
+
+## Tecnologías Utilizadas
+
+- Python 3  
+- Pandas  
+- NumPy  
+- Matplotlib  
+- Google Colab  
+
+---
+
+## Resultados Generados
+
+El sistema produce:
+
+- Tablas de indicadores por sesión  
+- Comparación completa entre escenarios  
+- Evaluación de desempeño del sistema  
+- Gráficas exportadas en formato PNG:
+  - Tiempo de espera en cola (Wq)  
+  - Tiempo total en el sistema (W)  
+  - Factor de utilización (ρ)  
+  - Longitud de cola (Lq)  
+  - Reducción porcentual de tiempos  
+  - Comparación entre modelos M/M/1 y M/M/2  
+
+---
+
+## Ejecución
+
+1. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/tu-usuario/tu-repositorio.git
